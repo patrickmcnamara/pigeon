@@ -22,8 +22,8 @@ github.com/muesli/reflow v0.2.1-0.20210115123740-9e1d0d53df68/go.mod h1:Xk+z4oIW
 github.com/muesli/termenv v0.7.2/go.mod h1:ct2L5N2lmix82RaY3bMWwVu/jUFc9Ule0KGDCiKYPh8=
 github.com/muesli/termenv v0.7.4 h1:/pBqvU5CpkY53tU0vVn+xgs2ZTX63aH5nY+SSps5Xa8=
 github.com/muesli/termenv v0.7.4/go.mod h1:pZ7qY9l3F7e5xsAOS0zCew2tME+p7bWeBkotCEcIIcc=
-github.com/patrickmcnamara/bird v0.0.0-20210202165302-baab91d53cec h1:g95OtRj/6CousT8L/iiYu/J+LrG7ItzvE3y5euI9/c0=
-github.com/patrickmcnamara/bird v0.0.0-20210202165302-baab91d53cec/go.mod h1:h+XxFNfdISJKOd0joP8i/6OBHdAchydC+30ctMXQCEI=
+github.com/patrickmcnamara/bird v0.2.0 h1:GEM9ciL45qV8B9w8GCgfIhiE+C7QIA3pI6qA2J0npEQ=
+github.com/patrickmcnamara/bird v0.2.0/go.mod h1:h+XxFNfdISJKOd0joP8i/6OBHdAchydC+30ctMXQCEI=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/rivo/uniseg v0.1.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=

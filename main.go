@@ -43,17 +43,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				return m, nil
 			}
 			return m, func() tea.Msg {
-				sr, err := bird.Fetch(m.ti.Value())
+				rawurl := m.ti.Value()
+				sr, c, err := bird.Fetch(rawurl)
 				if err != nil {
-					buf := new(bytes.Buffer)
-					sw := seed.NewWriter(buf)
-					sw.Header(1, "ERROR from pigeon")
-					sw.Break()
-					sw.Code()
-					sw.Text(err.Error())
-					return seed.NewReader(buf)
+					return err
 				}
-				return sr
+				return birdResponse{sr: sr, close: c}
 			}
 		}
 	case tea.WindowSizeMsg:
@@ -64,8 +59,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.vp.Width = msg.Width
 			m.vp.Height = msg.Height - 5
 		}
-	case *seed.Reader:
-		m.vp.SetContent(seedToText(msg))
+	case birdResponse:
+		m.vp.SetContent(seedToText(msg.sr))
+		return m, func() tea.Msg {
+			return msg.close()
+		}
+	case error:
+		buf := new(bytes.Buffer)
+		sw := seed.NewWriter(buf)
+		sw.Header(1, "ERROR from pigeon")
+		sw.Break()
+		sw.Text(msg.Error())
+		sr := seed.NewReader(buf)
+		m.vp.SetContent(seedToText(sr))
 		return m, nil
 	}
 	var cmd tea.Cmd
