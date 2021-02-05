@@ -68,7 +68,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		buf := new(bytes.Buffer)
 		sw := seed.NewWriter(buf)
 		sw.Header(1, "ERROR from pigeon")
-		sw.Break()
+		sw.Text("")
 		sw.Text(msg.Error())
 		sr := seed.NewReader(buf)
 		m.vp.SetContent(seedToText(sr))
@@ -90,13 +90,11 @@ func (m model) View() string {
 	}
 
 	// header
-	header := m.ti.View() + " " + strings.Repeat("─", m.vp.Width-m.ti.Width-1)
+	header := "> bird:" + m.ti.View() + " " + strings.Repeat("─", m.vp.Width-m.ti.Width-8)
 
 	// body
 	body := m.vp.View()
-	if strings.Trim(body, "\n") != "" {
-		body += "\n"
-	}
+	body += strings.Repeat("\n", m.vp.Height-strings.Count(body, "\n"))
 
 	// footer
 	footer := strings.Repeat("─", m.vp.Width-5) + " " + fmt.Sprintf("%3.f%%", m.vp.ScrollPercent()*100)
@@ -108,7 +106,8 @@ func (m model) View() string {
 func main() {
 	// setup textbox
 	ti := textinput.NewModel()
-	ti.Placeholder = "bird://"
+	ti.Prompt = ""
+	ti.Placeholder = "//"
 
 	prog := tea.NewProgram(model{ti: ti})
 	prog.Start()
